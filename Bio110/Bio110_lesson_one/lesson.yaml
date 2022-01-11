@@ -1,0 +1,96 @@
+- Class: meta
+  Course: Bio110
+  Lesson: Lesson_one
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.4
+
+- Class: text
+  Output: Welcome to this Swirl introduction to R. You will learn how to enter data and to perform some basic operations. When you see a string of dots (....), please hit Return.
+
+- Class: text
+  Output: R is a program for dealing with data. In Biology courses, most of the time your data will be in the form of a table with columns and rows.
+
+- Class: text
+  Output: "Later on, you will learn how to import your own data table into R in order to work with it. For now, we will work with a very simple set of data: data for a single variable."
+
+- Class: text
+  Output: "For example, suppose you have measured the diameters of a sample of 8 bacterial colonies. The data values (in mm) are: 4, 3.5, 6.1, 2.2, 4.7, 3, 5.2, and 4.6."
+
+- Class: text
+  Output: "In R, you 'assign' these values to a variable name using an 'arrow' formed by the 'less than' symbol and the dash, like this: <-. On the left side of the arrow, put the name of the variable you wish to create. The name should be short, descriptive, and must not contain any spaces. On the right of the arrow, type your data values, separated by commas. The data values should be enclosed in parentheses, and preceded by the letter c, which stands for 'concatenate' or 'combine' all the values into a single vector of values. This command creates a variable called 'diam' that contains our example data values: diam<-c(4,3.5,6.1,2.2,4.7,3,5.2,4.6)"
+
+- Class: cmd_question
+  Output: Now you should try creating the diam variable using these same data. When you see a blue carat symbol (>), Swirl will not let you continue until you have typed the correct response and hit Return.
+  CorrectAnswer: diam<-c(4,3.5,6.1,2.2,4.7,3,5.2,4.6)
+  AnswerTests: omnitest(correctExpr='diam<-c(4,3.5,6.1,2.2,4.7,3,5.2,4.6)')
+  Hint: Don't forget the parentheses.
+
+- Class: text
+  Output: If you are interested in knowing what a variable contains, you can just type its name. R is case-sensitive, so be careful about whether you type in upper or lower case.
+
+- Class: cmd_question
+  Output: Try typing diam and see what you get.
+  CorrectAnswer: diam
+  AnswerTests: omnitest(correctExpr='diam')
+  Hint: Just type the word 'diam'.
+
+- Class: text
+  Output: "If you would like to find out more about how to create variables and data tables in R, go to the Swirl course repository and take the tutorials titled 'basic building blocks' and 'vectors.' This is something to explore later; you do not need to do it now."
+
+- Class: text
+  Output: "In an R data table, each column represents a different variable. Each observational unit is represented by a separate row in the table. The first row of the table is used for the names of the different variables. In R, variable names must not contain any spaces."
+
+- Class: text
+  Output: "A table with this format has been created for you and imported into this tutorial. It has been given the creative name of 'data'."
+
+- Class: cmd_question
+  Output: Type a command that will show you a display of the data table called "data".
+  CorrectAnswer: data
+  AnswerTests: omnitest(correctExpr='data')
+  Hint: To see an object in R, type its name. No quotes are required.
+
+- Class: text
+  Output: "You can see that this data table contains 4 variables and 15 rows. (Also, each row is numbered sequentially; these numbers are not considered a variable.) These data are from a physiological study. Each individual's respiratory quotient (RQ) was measured, either after exercise (1), or during rest (2). Their heart rates in beats per minute were also measured. NA stands for 'not available,' meaning that the data for these combinations of individual and variable were lost or not recorded."
+
+- Class: text
+  Output: "You might wish to see just one of the variables in this data file. The way to specify an individual variable is to use the name of the data file, followed by the dollar sign, followed by the name of the variable -- with no spaces."
+
+- Class: cmd_question
+  Output: What would you type to see a list of the heart_rate data values in this file?
+  CorrectAnswer: data$heart_rate
+  AnswerTests: omnitest(correctExpr='data$heart_rate')
+  Hint: Try data$heart_rate
+
+- Class: text
+  Output: In R, each variable is encoded as either numeric (a number), integer (a whole number), a factor (a category, expressed either as a word or a number), or character (a string of letters). There are other less common variable properties as well. A variable's property is important because some operations can only be carried out on variables with certain properties.
+
+- Class: text
+  Output: "A data file's 'structure' refers to the properties of its variables. To find out the properties of all the variables in a data set, you would use the command str(dataname), using the name of your data file in place of the placeholder here."
+
+- Class: cmd_question
+  Output: "Write a command that will allow you to see the structure of 'data.'"
+  CorrectAnswer: str(data)
+  AnswerTests: omnitest(correctExpr='str(data)')
+  Hint: Try str(data)
+
+- Class: text
+  Output: "You can see that the variable data$Condition is currently encoded as an integer. But it is actually a category variable. You can change this variable's property with the assignment arrow, in the following way: data$Condition <-as.factor(data$Condition)"
+
+- Class: cmd_question
+  Output: Try changing the variable named "Individual" to a factor variable. You will notice that a little prompt box shows up. You can save yourself some typing by choosing the rest of the expression from among the choices in the prompt box.
+  CorrectAnswer: data$Individual<-as.factor(data$Individual)
+  AnswerTests: omnitest(correctExpr='data$Individual<-as.factor(data$Individual)')
+  Hint: Remember to use the dollar sign notation, and that R is case-sensitive.
+
+- Class: text
+  Output: Congratulations! You have finished the first R tutorial. You have learned how to create a variable in R, how data files in R are organized, and how to examine and change the properties of different variables.
+
+- Class: mult_question
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: submit_log()
+  Hint: hint

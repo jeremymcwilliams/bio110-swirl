@@ -1,0 +1,120 @@
+- Class: meta
+  Course: Bio110
+  Lesson: lesson_three
+  Author: Paulette Bierzychudek
+  Type: Standard
+  Organization: Lewis & Clark College
+  Version: 2.4.4
+
+- Class: text
+  Output: Welcome to Swirl! In this lesson you will learn about measures of variability. But first, notice that R has just told you that it has loaded certain packages. An R package is a group of functions that perform special operations. R has loaded these packages to permit you to use these functions in this tutorial. When you start working on your own data outside of these tutorials, you will sometimes need to tell R to load certain packages. We'll walk you through this step when it is needed.
+
+- Class: text
+  Output: You have already learned that one important way to summarize a set of data values is with a measure of central tendency, the mean or the median.
+
+- Class: text
+  Output: Another important summary statistic is the amount of variation around that central tendency.
+
+- Class: text
+  Output: This lesson contains a dataset that you will work with, named data. You have already worked with these data, in lesson one.
+
+- Class: cmd_question
+  Output: Type the word data to recall what it contains.
+  CorrectAnswer: data
+  AnswerTests: omnitest(correctExpr='data')
+  Hint: Did you spell data correctly? No quotation marks are needed.
+
+- Class: text
+  Output: The dataset contains physiological data for a sample of individuals.
+
+- Class: mult_question
+  Output: How many different individuals are in the sample?
+  AnswerChoices: 9;18;14
+  CorrectAnswer: 14
+  AnswerTests: omnitest(correctVal='14')
+  Hint: Each individual has a unique number.
+
+- Class: text
+  Output: The Condition variable specifies whether the measurements were made under exercise (1) or resting (2) conditions.
+
+- Class: text
+  Output: Suppose we want to compute the mean and the variability of RQ (respiratory quotient) for the individuals in our sample, but we want separate values for the exercise and resting conditions.
+
+- Class: text
+  Output: We can do this with the tapply() function, which allows us to compute the value of some function, such as the mean, for a numeric variable that has been subdivided into groups according to the values of another, category variable, such as Condition.
+
+- Class: text
+  Output: "The syntax for this command is: tapply(datafilename$numeric_variable, datafilename$grouping_variable,function_name)."
+
+- Class: cmd_question
+  Output: Find the mean RQ for the two conditions, exercise and at rest. Be sure to substitute the actual names of your variables and function for the placeholders shown in the sample command above.
+  CorrectAnswer: tapply(data$RQ,data$Condition,mean)
+  AnswerTests: omnitest(correctExpr='tapply(data$RQ,data$Condition,mean)')
+  Hint: The grouping variable is data$Condition. Remember that R is case-sensitive.
+
+- Class: text
+  Output: One common measure of variability is the variance. The variance is the square of the average difference between each data value and the mean.
+
+- Class: text
+  Output: You can compute the variance of a variable with the var function.
+
+- Class: cmd_question
+  Output: "Use var to compute the variance of the RQ for the two conditions. Time-saving hint: use the up arrow to recall the previous command, and then modify it."
+  CorrectAnswer: tapply(data$RQ,data$Condition,var)
+  AnswerTests: omnitest(correctExpr='tapply(data$RQ,data$Condition,var)')
+  Hint: Use the tapply() function.
+
+- Class: text
+  Output: Another common measure of variance is the standard deviation, which is simply the square root of the variance. The function for standard deviation is sd.
+
+- Class: cmd_question
+  Output: Compute the standard deviation of RQ for each of the two conditions.
+  CorrectAnswer: tapply(data$RQ,data$Condition,sd)
+  AnswerTests: omnitest(correctExpr='tapply(data$RQ,data$Condition,sd)')
+  Hint: Did you remember that R is case-sensitive?
+
+- Class: text
+  Output: One reason to compute the variability in a data set is to get an idea of how accurately our sample has estimated the mean of a population. Two additional measures of variability, standard error and confidence intervals, do this more usefully than variance or standard deviation.
+
+- Class: text
+  Output: This is because both standard error and confidence intervals become smaller as the sample size, or number of data values, gets larger -- which reflects our increased certainty that our sample mean represents the true population mean.
+
+- Class: text
+  Output: "To compute the standard error of a set of data in R, a package called 'plotrix' is required. In this tutorial, plotrix has already been installed for you."
+
+- Class: text
+  Output:  The function for computing the standard error is std.error.
+
+- Class: cmd_question
+  Output: Compute the standard error of RQ for each of the two conditions.
+  CorrectAnswer: tapply(data$RQ, data$Condition,std.error)
+  AnswerTests: omnitest(correctExpr='tapply(data$RQ, data$Condition,std.error)')
+  Hint: Use the same syntax as you did for computing standard deviation.
+
+- Class: text
+  Output: Confidence intervals are closely related to standard error. The 95% confidence interval is a range of data values that encloses the sample mean. There is a 95% probability that the "true" mean lies within the 95% confidence interval of the sample mean.
+
+- Class: text
+  Output: "The easiest way to compute a 95% confidence interval is to use the t.test function."
+
+- Class: text
+  Output: "The command for the t-test is t.test(dataname$variablename), using the actual datafile and variable names instead of the placeholders shown here."
+
+- Class: text
+  Output: "Let's compute the confidence interval of the variable RQ measured during exercise. To do this, we need a way to extract a subset of the RQ data -- just the RQ values measured under Condition 1. In R, we do this by 'indexing' the value of one variable (RQ) by the value of a second variable (Condition). In this case, we wish to extract the values of RQ for those observations (rows) where Condition is exactly equal to 1(==1, in r-speak). The syntax is: data$RQ[data$Condition==1]"
+
+
+- Class: cmd_question
+  Output: Now write the command to perform a t-test on the subset of RQ values measured under Condition 1, exercise.
+  CorrectAnswer: t.test(data$RQ[data$Condition==1])
+  AnswerTests: omnitest(correctExpr='t.test(data$RQ[data$Condition==1])')
+  Hint: Try t.test(data$RQ[data$Condition==1])
+
+- Class: text
+  Output: In the output, you should see the name of the variable you created, followed by two lines of information that are not relevant if you are only interested in knowing the 95% confidence interval. The 95% confidence interval is on the following line, followed by a computation of the sample mean.
+
+- Class: text
+  Output: So for these data, the (rounded) sample mean is 0.876, and the 95% confidence interval ranges from a minimum value of 0.834 to a maximum of 0.917.
+
+- Class: text
+  Output: "Congratulations! You've completed lesson three, in which you learned how to compute several measures of variability (variance, standard deviation, standard error, and confidence intervals). You also learned two ways to subset a data set: using tapply and indexing.  In lesson four you will learn how to make a box plot, which is a basic way of graphically displaying the central tendency and the variability of any data set."

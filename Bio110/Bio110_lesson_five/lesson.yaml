@@ -1,0 +1,189 @@
+- Class: meta
+  Course: Bio110
+  Lesson: lesson_five
+  Author: Paulette Bierzychudek
+  Type: Standard
+  Organization: Lewis & Clark College
+  Version: 2.4.4
+
+- Class: text
+  Output: Welcome to Swirl lesson five, where you will learn the basics of graphing using scatterplots.
+
+- Class: text
+  Output: We will work with the physiology dataset, called data, that you have already seen.
+
+- Class: cmd_question
+  Output: "Type 'data' for a reminder of the variables that it contains."
+  CorrectAnswer: data
+  AnswerTests: omnitest(correctExpr='data')
+  Hint: Type the word data.
+
+- Class: text
+  Output: Scatterplots can be used when the dependent variable is continuous, and when the independent variable is either continuous or categorical. We'll work first with an example where both variables are continuous.
+
+- Class: text
+  Output: "Suppose we wanted to look at a scatterplot of the relationship between heart rate and respiratory quotient (RQ)."
+
+- Class: text
+  Output: When you examine the data table, you can see that there are some rows that are missing data for heart rate. In R, missing data are indicated by the letters NA. R will ignore these missing values when making a graph. One you collect your own data, this is the way to enter any missing data into your data table.
+
+- Class: text
+  Output: As you have learned, R has a function called plot that graphs the relationship between an independent and a dependent variable. When the independent variable is a factor variable, plot creates a box plot, as you saw in lesson four. When the independent variable is continuous (numeric), plot creates a scatterplot, as you will see in this lesson.
+
+- Class: text
+  Output: "The basic plot function has this form: plot(yourdata$xvariable, yourdata$yvariable). You would need to substitute the actual names for your dataset and variables used as place-holders here."
+
+- Class: cmd_question
+  Output: Use the plot command to plot the relationship between heart rate (on the x-axis) and RQ (on the y-axis). Be sure to use heart rate's proper variable name.
+  CorrectAnswer: plot(data$heart_rate,data$RQ)
+  AnswerTests: omnitest(correctExpr='plot(data$heart_rate,data$RQ)')
+  Hint: try plot(data$heart_rate,data$RQ)
+
+- Class: text
+  Output: Now that we have a basic graph, let's learn how to adjust some of the plotting parameters to change things like color, text size, axis labels, axis limits, and point style.
+
+- Class: cmd_question
+  Output: All of the plotting parameters that can be adjusted can be found on the par help page. In the last lesson you learned that you could find help for functions by clicking the Help tab in the Plot window and searching for the function. You can also find help by typing a question mark followed by a function name into the console. Type ?par to view this page and read through the graphical parameters.
+  CorrectAnswer: ?par
+  AnswerTests: omnitest(correctExpr='?par')
+  Hint: Type ?par
+
+- Class: text
+  Output: "Many of the par functions can be used as arguments in the plot function. Simply place them after the x and y arguments and separate them with commas. For example, plot(data$heart_rate,data$RQ,col='red') would generate our original plot, but with red points."
+
+- Class: cmd_question
+  Output: Try generating the original plot with blue points. Be sure to put quotes around the color name.
+  CorrectAnswer: plot(data$heart_rate,data$RQ,col='blue')
+  AnswerTests: omnitest(correctExpr='plot(data$heart_rate,data$RQ,col="blue")')
+  Hint: type col="blue" following the y argument.
+
+- Class: video
+  Output: R can generate figures with virtually any color. Check out the linked pdf to see the colors that can be specified by name. Would you like to go there now?
+  VideoLink: http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+- Class: text
+  Output: We can also use graphical parameters to adjust the type of point that is plotted on our graph. We use the pch= argument for this.
+
+- Class: cmd_question
+  Output: Generate the original plot with blue points and pch=16. This will plot closed circles.
+  CorrectAnswer: plot(data$heart_rate,data$RQ,col='blue',pch=16)
+  AnswerTests: omnitest(correctExpr='plot(data$heart_rate,data$RQ,col="blue",pch=16)')
+  Hint: Try plot(data$heart_rate,data$RQ,col="blue",pch=16)
+
+- Class: cmd_question
+  Output: Type the command to look at the help page for pch to see all of the possible symbols and their associated codes.
+  CorrectAnswer: ?pch
+  AnswerTests: omnitest(correctExpr='?pch')
+  Hint: Type ?pch
+
+- Class: text
+  Output: Our points are looking a little small. Let's make them larger with the cex= argument, which expands the character by a factor you can specify. As a default, they are set to cex=1.
+
+- Class: cmd_question
+  Output: Re-generate the original figure with blue, closed points and cex=1.5, i.e. points that are 1.5 times as large as before.
+  CorrectAnswer: plot(data$heart_rate,data$RQ,col="blue",pch=16,cex=1.5)
+  AnswerTests: omnitest(correctExpr='plot(data$heart_rate,data$RQ,col="blue",pch=16,cex=1.5)')
+  Hint: Type plot(data$heart_rate,data$RQ,col="blue",pch=16,cex=1.5)
+
+- Class: text
+  Output: Our axis labels aren't particularly clear or useful as is. Let's change them using the xlab='' and ylab='' arguments. Because the labels are character strings, we need to enclose them in quotes.
+
+- Class: cmd_question
+  Output: Re-generate the original figure with "Heart Rate" as the x-axis label and "RQ" as the y-axis label and all of the other updated graphical parameters. Specify the x-axis label before the y-axis label.
+  CorrectAnswer: plot(data$heart_rate,data$RQ,col='blue',pch=16,cex=1.5,xlab='Heart Rate',ylab='RQ')
+  AnswerTests: omnitest(correctExpr='plot(data$heart_rate,data$RQ,col="blue",pch=16,cex=1.5,xlab="Heart Rate",ylab="RQ")')
+  Hint: Type plot(data$heart_rate,data$RQ,col='blue',pch=16,cex=1.5,xlab="Heart Rate",ylab="RQ")
+
+- Class: text
+  Output: Now you've learned the basics of creating a scatterplot when both the x and y variables are continuous. You know how to alter many aspects of your figure's appearance to make it clearer.
+
+- Class: text
+  Output: "Next, we'll look at making scatterplots when the independent (x) variable is categorical. When data are in the form of numbers, R can treat them either as continuous (numeric variables, in R language) or as categorical (factor variables, in R language)."
+
+- Class: text
+  Output: "In 'data' the different measurements are categorized as having been made under either exercise (1) or resting (2) conditions."
+
+- Class: text
+  Output: "Suppose you wanted to create a graph that compared the respiratory quotients (RQ) under these two conditions. To make sure that R will create a scatterplot from these data, rather than a boxplot, we need to make sure that it considers the Condition variable to be numeric. We can do that with this command: data$variable<-as.numeric(data$variable)."
+
+- Class: cmd_question
+  Output: Make sure that data$Condition is a numeric variable. Be sure to substitute the actual variable name for the placeholder.
+  CorrectAnswer: data$Condition<-as.numeric(data$Condition)
+  AnswerTests: omnitest(correctExpr='data$Condition<-as.numeric(data$Condition)')
+  Hint: Type a hint.
+
+- Class: cmd_question
+  Output: Use the plot function to graph the RQs of the two groups, exercise and resting.
+  CorrectAnswer: plot(data$Condition, data$RQ)
+  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ)')
+  Hint: Remember that variable names are case-sensitive.
+
+- Class: text
+  Output: Notice that a scatterplot (rather than a boxplot) is only a good option for a categorical x-variable if there are only a few data values, as in this example.
+
+- Class: text
+  Output: However, this scatterplot is not very easy to read. For one, the axis labels are not very clear. We can change the plotting parameters to improve the appearance of the figure.
+
+- Class: text
+  Output: "The axis labels should be self-explanatory. We can change them by adding the xlab='' and ylab='' arguments to the plot command. Because these labels are character strings (i.e. lists of letters), we need to enclose them in quotation marks."
+
+- Class: text
+  Output: "You can do this by adding axis label arguments to the plot command, within the parentheses, as you did when making box plots. For example, you might write: plot(data$x, data$y, xlab='my x-axis label', ylab='my y-axis label')."
+
+- Class: cmd_question
+  Output: Try it yourself, with 'Condition' as the x-axis label, and 'RQ' as the y-axis label.
+  CorrectAnswer: plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ")
+  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ")')
+  Hint: Remember that text is case-sensitive.
+
+- Class: text
+  Output: "This is better, but still not clear enough. The values '1' and '2' represent the two categories, but values like 1.4 do not make sense. And the two groups of points should be centered on the x-axis."
+
+- Class: text
+  Output: To center the points better, we can increase the limits of the x-axis, e.g. so that they range from 0.5 to 2.5.
+
+- Class: text
+  Output: "You can do this by inserting 'xlim=c(0.5, 2.5)' into the plot command: plot(data$x, data$y, xlim=c(0.5,2.5))"
+
+- Class: cmd_question
+  Output: Try it now, adding new xlimits to the plot you have already created with axis labels. Don't forget to save typing by using the 'up' arrow.
+  CorrectAnswer: plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ", xlim=c(0.5,2.5))
+  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ", xlim=c(0.5,2.5))')
+  Hint: Remember to put all text expressions in quotes.
+
+- Class: text
+  Output: "We also want to replace the existing numeric labels with the words 'exercise' and 'resting', centered under each cluster of points."
+
+- Class: text
+  Output: "To do this, we first suppress the xaxis numbers, using the argument 'xaxt='n'' in the plot command's parentheses. This command means that the x axis text should be 'null', i.e. missing."
+
+- Class: cmd_question
+  Output: Modify the plot command to suppress the x-axis text.
+  CorrectAnswer: plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ",xlim=c(0.5,2.5), xaxt='n')
+  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ",xlim=c(0.5,2.5), xaxt="n")')
+  Hint: Try plot(data$Condition, data$RQ, xlab="Condition", ylab="RQ",xlim=c(0.5,2.5), xaxt='n')
+
+- Class: text
+  Output: Now you have created a plot that has no numerical labels on the x-axis. We can now use the axis command to specify what our new x-axis should look like. This is a separate command that you execute after you have made your graph.
+
+- Class: text
+  Output: "The syntax of this command is: axis(side, at=1:2,labels=c('category1name', 'category2name', etc.)) 'Side' indicates which axis of the graph to modify; 'at' shows where along the x-axis the labels should be placed. Even though you have removed the old labels 1 and 2, R still knows where these positions are, and you can use them to place your labels under the clusters of points. "
+
+- Class: cmd_question
+  Output: Add a new x-axis to your plot that labels the former '1' category as exercise and the former '2' category as resting. For 'side,' use a 1, which represents the bottom axis of the figure. Remember, this is a new command; you do not need to repeat the plot command.
+  CorrectAnswer: axis(1,at=1:2, labels=c("resting","exercise"))
+  AnswerTests: omnitest(correctExpr='axis(1,at=1:2, labels=c("resting","exercise"))')
+  Hint: There is no need to retype the plot command unless you have made some errors and you'd like a fresh version. The axis command adds an axis to a pre-existing plot.
+
+
+- Class: text
+  Output: "That's it! Now you're an expert in making scatterplots. In lesson six, you'll learn how to make two kinds of bar graphs."
+
+
+- Class: mult_question
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: submit_log()
+  Hint: hint

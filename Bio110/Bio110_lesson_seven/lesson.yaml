@@ -1,0 +1,315 @@
+- Class: meta
+  Course: lesson_seven
+  Lesson: Bio110
+  Author: Paulette Bierzychudek
+  Type: Standard
+  Organization: Lewis & Clark College
+  Version: 2.4.4
+
+- Class: text
+  Output: Welcome back to Swirlify. In this lesson you will learn how to perform some basic inferential statistics.
+
+- Class: text
+  Output: When testing scientific hypotheses, we are trying to decide whether the pattern in our data supports the hypothesis or not.
+
+- Class: text
+  Output: But some apparent patterns can be due to chance alone. Statistical inference gives us a way to compute the likelihood that an apparent pattern in our data could be due merely to chance.
+
+- Class: text
+  Output: "Most scientists only accept a pattern as supporting a hypothesis if it is very unlikely that the pattern could be due to chance. We define an event as 'very unlikely' if it has a probability of .05 (5%) or less."
+
+- Class: text
+  Output: "Statistical inference involves using the data to compute the probability -- the 'p-value' -- that a pattern could have arisen by chance. If the p-value associated with a test is less than or equal to 0.05, we conclude that the pattern is 'statistically significant'. In other words, the pattern is highly unlikely to have arisen by chance."
+
+- Class: text
+  Output: "In this tutorial you will work with a sample dataset called 'sampledata' that has already been imported into the tutorial."
+
+- Class: cmd_question
+  Output: Write the command for looking at the structure of sampledata so you can see what it contains.
+  CorrectAnswer: str(sampledata)
+  AnswerTests: omnitest(correctExpr='str(sampledata)')
+  Hint: The structure function is str(datafilename).
+
+- Class: cmd_question
+  Output: You should also look at the values in the table. Write the command to display the data file.
+  CorrectAnswer: sampledata
+  AnswerTests: omnitest(correctExpr='sampledata')
+  Hint: Just type the name of the file.
+
+- Class: text
+  Output: "You can see that sampledata contains 30 different observations (rows) and 5 variables (columns). Weight, length, and repro are numerical variables. temp is a factor variable with two levels, A and B. Diet is an integer variable, but in this data set, we will want to use it as a factor variable: the experimental organisms were fed one of three possible types of diet."
+
+- Class: cmd_question
+  Output: write a command that will convert diet to a factor variable.
+  CorrectAnswer: sampledata$diet<-as.factor(sampledata$diet)
+  AnswerTests: omnitest(correctExpr='sampledata$diet<-as.factor(sampledata$diet)')
+  Hint: You will need to use the as.factor() function.
+
+- Class: text
+  Output: Let's start by thinking about situations where both the independent and dependent variables are continuous. You are interested in knowing if there is an association or a relationship between the values of the two variables. Does the value of one predict the value of the other?
+
+- Class: text
+  Output: We will work with the variables for weight and for length.
+
+- Class: mult_question
+  Output: What is the most appropriate kind of plot for looking at the possible relationship between two continuous variables?
+  AnswerChoices: scatterplot;histogram;barplot;boxplot
+  CorrectAnswer: scatterplot
+  AnswerTests: omnitest(correctVal='scatterplot')
+  Hint: A scatterplot is a good approach.
+
+- Class: cmd_question
+  Output: Write a command to plot the relationship between weight and length. Put length on the x-axis.
+  CorrectAnswer: plot(sampledata$length, sampledata$weight)
+  AnswerTests: omnitest(correctExpr='plot(sampledata$length, sampledata$weight)')
+  Hint: Did you remember to use the dollar sign to specify the data file, and that the x-variable goes first in the plot command?
+
+- Class: text
+  Output: You can see that there is a strong tendency for low values of length to be associated with low weights, and vice versa.
+
+- Class: text
+  Output: "We can carry out a regression analysis to find the equation for the best-fit line through the points. The command: model<-lm(sampledata$weight~sampledata$length) performs a regression of weight (the y-variable) on length (the x-variable) and stores it in a variable called model. lm stands for 'linear model.' It is important to notice that in this command, the positions of the x- and y-variables are reversed from what they are in the plot command, and they are separated by a tilde (~) rather than a comma."
+
+- Class: cmd_question
+  Output: Write the command to perform a linear regression of weight on length for sampledata, and store it in a variable called weightreg.
+  CorrectAnswer: weightreg<-lm(sampledata$weight~sampledata$length)
+  AnswerTests: omnitest(correctExpr='weightreg<-lm(sampledata$weight~sampledata$length)')
+  Hint: Try weightreg<-lm(sampledata$weight~sampledata$length)
+
+- Class: text
+  Output: To see the line superimposed on your graph, you can give the command abline(model).
+
+- Class: cmd_question
+  Output: Write the command to add a regression line to your scatterplot. Don't forget to substitute 'weightreg' for 'model'.
+  CorrectAnswer: abline(weightreg)
+  AnswerTests: omnitest(correctExpr='abline(weightreg)')
+  Hint: The command is abline(weightreg)
+
+- Class: text
+  Output: "You can find the slope of the line and the y-intercept (the values m and b in the equation y = mx + b) by typing the name of the viariable you created from your regression."
+
+- Class: cmd_question
+  Output: "Write the code to find the slope and y-intercept of the best-fit line."
+  CorrectAnswer: weightreg
+  AnswerTests: omnitest(correctExpr='weightreg')
+  Hint: "You named your regression variable 'weightreg'."
+
+- Class: text
+  Output: The output shows the values of the line's y-intercept (-5.1502) and its slope (0.8149).
+
+- Class: text
+  Output: The points fit the line quite well. It seems unlikely that this association could have happened just by accident, though it IS possible. We would like to know the probability that there is actually no relationship between these two variables, that the slope of the true line through them is actually zero (a flat line).
+
+- Class: text
+  Output: We can find the p-value by using the command summary(model).
+
+- Class: cmd_question
+  Output: Write the command to find the probability that the true slope of the line is zero. Don't forget to use the name you gave your model variable.
+  CorrectAnswer: summary(weightreg)
+  AnswerTests: omnitest(correctExpr='summary(weightreg)')
+  Hint: The command is summary(weightreg).
+
+- Class: text
+  Output: In the 'coefficients' table, the line for sampledata$length shows a p-value, 4.7 x 10^-8, that is much smaller than 0.05. This means that you can conclude that the effect of length on weight in this sample is highly statistically significant.
+
+- Class: text
+  Output: Now consider a different data analysis situation. Suppose you did a study where you measured some continuous dependent variable under two different conditions, and you want to know if the two groups differ.
+
+- Class: text
+  Output: Again using sampledata, consider the categorical variable temp. Suppose we want to know whether weight differs depending on whether the temp category is A or B. In this situation, we would perform a t-test.
+
+- Class: text
+  Output: First it is a good idea to look at the data visually. We can most easily do this with a boxplot.
+
+- Class: mult_question
+  Output: To create a boxplot that compares weights for the two different temp categories, what variable should go on the x-axis?
+  AnswerChoices: temp;weight;length
+  CorrectAnswer: temp
+  AnswerTests: omnitest(correctVal='temp')
+  Hint: Use the variable that defines the categories.
+
+- Class: text
+  Output: In lesson 3, you used the plot function to make both boxplots and scatterplots, depending on the nature of the independent variable (categorical or continuous). There is another boxplot command, creatively named boxplot.
+
+- Class: text
+  Output: "In the boxplot command, any independent variable that is numeric is treated as a factor variable automatically. Its syntax is: boxplot(depvar ~ indepvar). Notice that, unlike the plot command, the dependent variable is listed first in the boxplot command, and the two variables are separated by a tilde. It is easy to get these two commands mixed up! "
+
+- Class: cmd_question
+  Output: Using the boxplot function, write the command to make a boxplot of weights for the two temp categories
+  CorrectAnswer: boxplot(sampledata$weight~sampledata$temp)
+  AnswerTests: omnitest(correctExpr='boxplot(sampledata$weight~sampledata$temp)')
+  Hint: In the parentheses, the dependent variable goes first, followed by the squiggle, and then the independent variable.
+
+- Class: text
+  Output: You can see that the medians for the two sets of data values are different, but the values overlap quite a bit. Are they different enough that the difference is unlikely to be due to chance?
+
+- Class: text
+  Output: "We can find out by performing a t-test. You used a t-test in lesson 3 to calculate the confidence interval for a single variable; this is called a one-sample t-test. This time you will do a two-sample t-test, which is a way of finding out whether two groups of data differ significantly."
+
+- Class: text
+  Output: "There are two ways of writing the t-test command. If the data are in one variable, and the classification categories are in another, as they are in this case, we would write: t.test(data$depvar ~ data$catvar), using real file and variable names in place of these placeholders."
+
+- Class: cmd_question
+  Output: Write the command to perform a t-test to determine if weights for the different temperatures are significantly different.
+  CorrectAnswer: t.test(sampledata$weight~sampledata$temp)
+  AnswerTests: omnitest(correctExpr='t.test(sampledata$weight~sampledata$temp)')
+  Hint: try t.test(sampledata$weight~sampledata$temp)
+
+- Class: text
+  Output: The output shows a p-value (in this case, 0.2308) for the probability that a difference this large could be due to chance alone. Since p is greater than 0.05, we should conclude that the differences in weights are NOT statistically significant. The two groups might really have similar weights, but just by chance, we sampled heavier individuals in one group than in the other.
+
+- Class: text
+  Output: Sometimes the data for the two groups we would like to compare with a t-test are in two different variables of our data table.
+
+- Class: text
+  Output: "When that is the case, we use this command: t.test(varA, varB)  If we wished, we could use the subset command to create two separate variables from sampledata$weight, but this would be an unnecessary extra step. If we did this, though, we would get the same result."
+
+- Class: text
+  Output: "It is important to remember, though, that t-tests are designed for data values with a normal distribution. Sometimes data are very non-normal. For example, go back and look at the variable repro."
+
+- Class: text
+  Output: You can see that there are a very large number of zeroes. This is often a good indication that the mean is not the center of the data distribution.
+
+- Class: text
+  Output: There is an alternative to the t-test that does not require the data to have a normal distribution. It is called a Wilcoxon test (also sometimes a Mann-Whitney Test).
+
+- Class: cmd_question
+  Output: Before doing a statistical test, though, write some code to make a boxplot showing how the values of repro differ for the two temperatures.
+  CorrectAnswer: boxplot(sampledata$repro~sampledata$temp)
+  AnswerTests: omnitest(correctExpr='boxplot(sampledata$repro~sampledata$temp)')
+  Hint: Put the y-variable first, followed by the squiggle, and then the x-variable.
+
+- Class: text
+  Output: Once again, the medians differ, but the data values for the two groups overlap.
+- Class: text
+  Output: "To carry out a Wilcoxon test, use the command: wilcox.test(data$depvar~data$catvar)"
+
+- Class: cmd_question
+  Output: Write the command to perform a Wilcoxon test to determine whether values of repro differ for the two temp conditions.
+  CorrectAnswer: wilcox.test(sampledata$repro~sampledata$temp)
+  AnswerTests: omnitest(correctExpr='wilcox.test(sampledata$repro~sampledata$temp)')
+  Hint: try wilcox.test(sampledata$repro~sampledata$temp)
+
+- Class: text
+  Output: It's fine to ignore the warning values that you see whenever the data contain duplicate values. You can see that the p-value (.076) tells you that the differences are NOT statistically significant, though they are nearly so.
+
+- Class: text
+  Output: Another data analysis situation you might encounter is the need to compare more than two groups with each other. This is done with a test called an analysis of variance (ANOVA).
+
+- Class: text
+  Output: Suppose we wanted to know whether diet had an effect on the length of the organisms in our sample. Notice that there are 3 diet categories.
+
+- Class: cmd_question
+  Output: Write a command to create a boxplot for length as a function of diet category.
+  CorrectAnswer: boxplot(sampledata$length~sampledata$diet)
+  AnswerTests: omnitest(correctExpr='boxplot(sampledata$length~sampledata$diet)')
+  Hint: Length is the dependent variable, diet is the independent variable.
+
+- Class: text
+  Output: We can see that length is quite different between diets 1 and 2, but not nearly as different between diets 2 and 3. Are these differences statistically significant?
+
+- Class: text
+  Output: "The command to perform an ANOVA is: model<-aov(depvar~indvar). This syntax (dependent variable, tilde, independent variable) should be feeling familiar by now."
+
+- Class: cmd_question
+  Output: Write a command to perform an ANOVA on length as a function of diet, and assign the result to a variable called dietaov.
+  CorrectAnswer: dietaov<-aov(sampledata$length~sampledata$diet)
+  AnswerTests: omnitest(correctExpr='dietaov<-aov(sampledata$length~sampledata$diet)')
+  Hint: try dietaov<-aov(sampledata$length~sampledata$diet)
+
+- Class: text
+  Output: To see the output from the ANOVA, you can use the command summary(model), replacing the placeholder with your own model's name.
+
+- Class: cmd_question
+  Output: Write a command to look at the output from your ANOVA.
+  CorrectAnswer: summary(dietaov)
+  AnswerTests: omnitest(correctExpr='summary(dietaov)')
+  Hint: It's summary(dietaov)
+
+- Class: text
+  Output: The output is a table of numbers. The important line is the one labelled sampledata$diet. This reports the probability that the differences in length among the diets could be merely due to chance. The p-value is very small, .00011, so the effect of diet on length is highly statistically significant.
+
+- Class: text
+  Output: However, recall that you are comparing 3 groups, and that the differences between diet groups 1 and 2 were larger than the differences between diet groups 2 and 3. Are ALL these differences statistically significant?
+
+- Class: text
+  Output: Not necessarily. A significant p-value in an ANOVA only means that at least one of the groups is different from the rest, not that ALL the groups are different from one another.
+
+- Class: text
+  Output: So to probe the situation more deeply, we should follow up this significant ANOVA with a Tukey's test. A Tukey's test looks at all the pairwise comparisons of groups, and gives a separate p-value for each comparison.
+
+- Class: text
+  Output: "The command to perform a Tukey's test is TukeyHSD(model), HSD stands for 'honestly significant difference.'"
+
+- Class: cmd_question
+  Output: Write the command to perform a Tukey's test on your model.
+  CorrectAnswer: TukeyHSD(dietaov)
+  AnswerTests: omnitest(correctExpr='TukeyHSD(dietaov)')
+  Hint: Try TukeyHSD(dietaov)
+
+- Class: text
+  Output: The output is in the form of a table that compares each of the 3 groups to the others, with the p-value for that particular comparison as the final column.
+
+- Class: text
+  Output: We can see that diet group 1 differs significantly from group 2, and that group 1 differs from group 3, but that diet group 2 does NOT differ significantly from diet group 3.
+
+- Class: text
+  Output: ANOVA is a very versatile data analysis tool. For example, an ANOVA can be used to explore data from experiments that have more than one independent variable.
+
+- Class: text
+  Output: In our sampledata, there are two categorical variables, temp and diet. In the study that generated these data, individuals were reared under one of two different temperature regimes, and were raised on one of three different diets. We'd like to know how temp influenced body weight, how diet influenced body weight, and whether there was an interaction between the effects of temp and diet.
+
+- Class: text
+  Output: Let's start, as always, by looking at a graph. In this case, we want to see a clustered boxplot that shows all 6 combinations of diet and temperature as separate bars.
+
+- Class: text
+  Output: "To create a boxplot for a situation where there are two different independent variables, you can use this code: boxplot(depvar ~ indvar1*indvar2), replacing these placeholders with the appropriate file and variable names."
+
+- Class: cmd_question
+  Output: Write the code to create a boxplot of length, using temp for the first independent variable and diet for the second.
+  CorrectAnswer: boxplot(sampledata$length~sampledata$temp*sampledata$diet)
+  AnswerTests: omnitest(correctExpr='boxplot(sampledata$length~sampledata$temp*sampledata$diet)')
+  Hint: Try boxplot(sampledata$length~sampledata$temp*sampledata$diet)
+
+- Class: text
+  Output: "Notice that on the x-axis, there are 3 diet groups (1,2,and 3); within each group, the data for the two temps (A and B) are shown side-by-side. If instead you wanted two temp groups, with the 3 diets shown side-by-side within them, you would reverse the order of the two independent variables in the boxplot command."
+
+- Class: cmd_question
+  Output: Try it now. Write a boxplot command to create a length boxplot that has two temperature groups with the three diet types shown side-by-side.
+  CorrectAnswer: boxplot(sampledata$length~sampledata$diet*sampledata$temp)
+  AnswerTests: omnitest(correctExpr='boxplot(sampledata$length~sampledata$diet*sampledata$temp)')
+  Hint: Just reverse the positions of temp and diet in the code you just wrote.
+- Class: text
+  Output: We can assess the effect of both temperature and diet on length with a two-way ANOVA. The two-way refers to having two different independent variables, temp and diet in this case.
+
+- Class: text
+  Output: The command for performing a two-way ANOVA is model<-aov(data$depvar ~ data$cat1*data$cat2). cat1 and cat2 are placeholders that represent the 2 independent variables.
+
+- Class: cmd_question
+  Output: "Write a command to perform a two-way ANOVA on the effect of temp and diet on length, and store the result in a variable named length2way. Put temp in front of the *, and diet behind."
+  CorrectAnswer: length2way<-aov(sampledata$length~sampledata$temp*sampledata$diet)
+  AnswerTests: omnitest(correctExpr='length2way<-aov(sampledata$length~sampledata$temp*sampledata$diet)')
+  Hint: Try length2way<-aov(sampledata$length~sampledata$temp*sampledata$diet)
+
+- Class: cmd_question
+  Output: Type a command to look at the output from your new two-way ANOVA.
+  CorrectAnswer: summary(length2way)
+  AnswerTests: omnitest(correctExpr='summary(length2way)')
+  Hint: Try summary(length2way).
+
+- Class: text
+  Output: The table of output gives the probability that the differences in length between the two temperatures could due to chance alone, and the probability that the differences in length among the three diets could be due to chance alone. The interaction term assesses whether the effect of temperature depends on which diet type the organism received.
+
+- Class: text
+  Output: In this example, temperature did NOT have a significant effect on length (p=.205761), diet DID have a significant effect on length (p=.000124), and there was no interaction between temperature and diet (p=.154474)). In other words, the effect of temperature was the same for all diets, and the effect of diet was the same for both temperatures.
+
+- Class: text
+  Output: Congratulations! Now you are familiar with some of the most basic and widely-used tests of statistical inference. To learn more about statistical inference in general, consider taking Math 255. To learn more about carrying out statistical analyses in R, there are many online resources that can be easily found by Googling your specific situation.
+
+- Class: mult_question
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: submit_log()
+  Hint: hint
