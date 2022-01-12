@@ -171,8 +171,8 @@
 
 - Class: cmd_question
   Output: Add a new x-axis to your plot that labels the former '1' category as exercise and the former '2' category as resting. For 'side,' use a 1, which represents the bottom axis of the figure. Remember, this is a new command; you do not need to repeat the plot command.
-  CorrectAnswer: axis(1,at=1:2, labels=c("resting","exercise"))
-  AnswerTests: omnitest(correctExpr='axis(1,at=1:2, labels=c("resting","exercise"))')
+  CorrectAnswer: axis(1,at=1:2, labels=c("exercise","resting"))
+  AnswerTests: omnitest(correctExpr='axis(1,at=1:2, labels=c("exercise","resting"))')
   Hint: There is no need to retype the plot command unless you have made some errors and you'd like a fresh version. The axis command adds an axis to a pre-existing plot.
 
 

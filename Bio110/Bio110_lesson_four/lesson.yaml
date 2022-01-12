@@ -90,8 +90,8 @@
 
 - Class: cmd_question
   Output: Try it now, using "exercise" for the first category name, and "resting" for the second one. Put the names command in front of the arguments for the axis labels, and separate them with a comma.
-  CorrectAnswer: plot(data$Condition, data$RQ, names=c("Resting","Exercise"), xlab="Condition",ylab="RQ")
-  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, names=c("Resting","Exercise"), xlab="Condition",ylab="RQ")')
+  CorrectAnswer: plot(data$Condition, data$RQ, names=c("exercise","resting"), xlab="Condition",ylab="RQ")
+  AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, names=c("exercise","resting"), xlab="Condition",ylab="RQ")')
   Hint: In this tutorial, R is looking for you to enter the arguments in a particular order. Try putting the names argument in front of the axis label argument -- this might be why you got an error message despite seeing the correct graph.
 
 - Class: text
@@ -101,7 +101,7 @@
   Output: "You can do this by inserting the 'ylim=c(lowerlimit, upperlimit)' argument into the plot command like this: plot(data$x, data$y, ylim=c(0.75, 1.05))"
 
 - Class: cmd_question
-  Output: Try it now, adding these new ylimits to the plot you have already created with category and axis labels.
+  Output: Try it now, inserting the ylim specification after the commands for category names, axis labels, etc.
   CorrectAnswer: plot(data$Condition, data$RQ, names=c("exercise","resting"), xlab="Condition", ylab="RQ", ylim=c(0.75,1.05))
   AnswerTests: omnitest(correctExpr='plot(data$Condition, data$RQ, names=c("exercise","resting"), xlab="Condition", ylab="RQ", ylim=c(0.75,1.05))')
   Hint: Remember to put all text expressions in quotes. And R wants you to use the same case, upper or lower, as the instructions specify.
