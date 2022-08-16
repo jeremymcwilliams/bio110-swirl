@@ -183,10 +183,10 @@
 - Class: text
   Output: That's it! Now you know how to use bar graphs to display your data. Remember that if the distribution of data values is highly non-normal, boxplots are a more appropriate form of graphical display than bar graphs.
 
-- Class: mult_question
-  Output: Would you like to submit the log of this lesson to Google Forms so
-    that your instructor may evaluate your progress?
-  AnswerChoices: Yes;No
-  CorrectAnswer: NULL
-  AnswerTests: submit_log()
-  Hint: hint
+#- Class: mult_question
+#  Output: Would you like to submit the log of this lesson to Google Forms so
+#    that your instructor may evaluate your progress?
+#  AnswerChoices: Yes;No
+#  CorrectAnswer: NULL
+#  AnswerTests: submit_log()
+#  Hint: hint

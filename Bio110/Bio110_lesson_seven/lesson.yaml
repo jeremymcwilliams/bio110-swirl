@@ -306,10 +306,10 @@
 - Class: text
   Output: Congratulations! Now you are familiar with some of the most basic and widely-used tests of statistical inference. To learn more about statistical inference in general, consider taking Math 255. To learn more about carrying out statistical analyses in R, there are many online resources that can be easily found by Googling your specific situation.
 
-- Class: mult_question
-  Output: Would you like to submit the log of this lesson to Google Forms so
-    that your instructor may evaluate your progress?
-  AnswerChoices: Yes;No
-  CorrectAnswer: NULL
-  AnswerTests: submit_log()
-  Hint: hint
+#- Class: mult_question
+#  Output: Would you like to submit the log of this lesson to Google Forms so
+#    that your instructor may evaluate your progress?
+#  AnswerChoices: Yes;No
+#  CorrectAnswer: NULL
+#  AnswerTests: submit_log()
+#  Hint: hint

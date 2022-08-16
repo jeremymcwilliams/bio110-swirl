@@ -87,10 +87,10 @@
 - Class: text
   Output: Congratulations! You have finished the first R tutorial. You have learned how to create a variable in R, how data files in R are organized, and how to examine and change the properties of different variables.
 
-- Class: mult_question
-  Output: Would you like to submit the log of this lesson to Google Forms so
-    that your instructor may evaluate your progress?
-  AnswerChoices: Yes;No
-  CorrectAnswer: NULL
-  AnswerTests: submit_log()
-  Hint: hint
+#- Class: mult_question
+#  Output: Would you like to submit the log of this lesson to Google Forms so
+#    that your instructor may evaluate your progress?
+#  AnswerChoices: Yes;No
+#  CorrectAnswer: NULL
+#  AnswerTests: submit_log()
+#  Hint: hint
