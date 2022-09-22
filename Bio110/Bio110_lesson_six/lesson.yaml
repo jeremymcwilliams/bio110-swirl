@@ -176,8 +176,8 @@
 
 - Class: cmd_question
   Output: Try it yourself now.
-  CorrectAnswer: legend("topright",legend=c("Year 1","Year 2","Year 3"), fill=c("red","orange","yellow"))
-  AnswerTests: omnitest(correctExpr='legend("topright",legend=c("Year 1", "Year 2", "Year 3"), fill=c("red", "orange", "yellow"))')
+  CorrectAnswer: legend("topleft",legend=c("Year 1","Year 2","Year 3"), fill=c("red","orange","yellow"))
+  AnswerTests: omnitest(correctExpr='legend("topleft",legend=c("Year 1", "Year 2", "Year 3"), fill=c("red", "orange", "yellow"))')
   Hint: If you used single instead of double quotes, the command will work, but this tutorial might register it as wrong. We apologize! This is the end of lesson six.
 
 - Class: text
